@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
 }
 
+/* Header */
 header {
   background-color: #6a0dad;
   color: white;
@@ -28,6 +29,7 @@ h1 {
   letter-spacing: 1px;
 }
 
+/* Main content */
 main {
   width: 90%;
   max-width: 700px;
@@ -35,6 +37,7 @@ main {
   text-align: center;
 }
 
+/* Card sections */
 .card {
   background: white;
   border-radius: 15px;
@@ -48,6 +51,24 @@ main {
   transform: translateY(-5px);
 }
 
+.card h2 {
+  color: #6a0dad;
+  margin-bottom: 15px;
+}
+
+/* Lists (Tecnologías) */
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.card ul li {
+  padding: 5px 0;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Links */
 a {
   color: #6a0dad;
   font-weight: bold;
@@ -58,6 +79,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Footer */
 footer {
   margin-top: auto;
   background-color: #f3e9ff;
@@ -65,4 +87,16 @@ footer {
   text-align: center;
   padding: 15px 0;
   font-weight: 500;
+  color: #6a0dad;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
 }
