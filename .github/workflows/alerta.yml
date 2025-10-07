@@ -1,0 +1,36 @@
+name: CI - Alerta DevOps ITLA
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "18"
+
+    - name: Ejecutar Hola Mundo
+      run: |
+        echo "Ejecutando app.js"
+        node app.js
+
+    - name: Notificar ntfy (siempre)
+      if: always()
+      env:
+        STATUS: ${{ job.status }}
+        REPO: ${{ github.repository }}
+        SHA: ${{ github.sha }}
+        ACTOR: ${{ github.actor }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      run: |
+        BRANCH=${GITHUB_REF#refs/heads/}
+        MESSAGE="Estado: $STATUS\nRepositorio: $REPO\nRama: $BRANCH\nCommit: $SHA\nAutor: $ACTOR\nRun: $RUN_URL"
+        curl -s -S -X POST -H "Title: CI/CD - $REPO - $STATUS" -H "Tags: $STATUS" -d "$MESSAGE" https://ntfy.sh/devops-itla
